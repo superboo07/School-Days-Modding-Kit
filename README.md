@@ -1,4 +1,4 @@
-# School-Days-Stuff
+![](https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/School_Days_Logo.svg/250px-School_Days_Logo.svg.png)  
 Scripts created for School Days HQ modding, can't guarantee perfect compatibility with Shiny Days
 
 # Getting Started
