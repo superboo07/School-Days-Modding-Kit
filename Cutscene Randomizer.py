@@ -32,7 +32,7 @@ def scrambleDirectory(directory):
         print(i, "is now", randomFilename)
     dir_util.remove_tree(directory)
     dir_util.copy_tree(".tmp/", directory)
-    dir_util.remove_tree("tmp/")
+    dir_util.remove_tree(".tmp/")
 
 
 dir_util.copy_tree("./00", "./balls/")
