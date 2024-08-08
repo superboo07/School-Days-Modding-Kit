@@ -2,7 +2,7 @@
 Scripts created for School Days HQ modding, can't guarantee perfect compatibility with Shiny Days
 
 # Getting Started
-Before you begin modding this game you need to extract all of the files from the GPKs. You can do this with [Crage](http://ucla.jamesyxu.com/?p=50), and by using the following command.
+Before you begin modding this game you need to extract all of the files from the GPKs. You can do this with [Crage](https://web.archive.org/web/20230204182334/http://ucla.jamesyxu.com/?p=50), and by using the following command.
 ```
 crage.exe -d "E:\Games\School Days\Packs" -O exe="E:\Games\School Days\SCHOOLDAYS HQ.exe" 
 ```
