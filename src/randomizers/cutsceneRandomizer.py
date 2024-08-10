@@ -34,23 +34,23 @@ def scrambleDirectory(directory):
     dir_util.copy_tree(".tmp/", directory)
     dir_util.remove_tree(".tmp/")
 
-
-dir_util.copy_tree("./00", "./balls/")
-dir_util.copy_tree("./01", "./balls/")
-dir_util.copy_tree("./02", "./balls/")
-dir_util.copy_tree("./03", "./balls/")
-dir_util.copy_tree("./04", "./balls/")
-dir_util.copy_tree("./05", "./balls/")
-scrambleDirectory("./balls/")
-dir_util.remove_tree("./00")
-dir_util.remove_tree("./01")
-dir_util.remove_tree("./02")
-dir_util.remove_tree("./03")
-dir_util.remove_tree("./04")
-dir_util.remove_tree("./05")
-fileList = os.listdir("./balls/")
-for i in fileList:
-    folderName = i[0:2]
-    dir_util.mkpath("./" + folderName + "/")
-    file_util.copy_file("./balls/" + i, "./" + folderName + "/" + i)
-dir_util.remove_tree("./balls/")
+if __name__ == "__main__":
+    dir_util.copy_tree("./00", "./balls/")
+    dir_util.copy_tree("./01", "./balls/")
+    dir_util.copy_tree("./02", "./balls/")
+    dir_util.copy_tree("./03", "./balls/")
+    dir_util.copy_tree("./04", "./balls/")
+    dir_util.copy_tree("./05", "./balls/")
+    scrambleDirectory("./balls/")
+    dir_util.remove_tree("./00")
+    dir_util.remove_tree("./01")
+    dir_util.remove_tree("./02")
+    dir_util.remove_tree("./03")
+    dir_util.remove_tree("./04")
+    dir_util.remove_tree("./05")
+    fileList = os.listdir("./balls/")
+    for i in fileList:
+        folderName = i[0:2]
+        dir_util.mkpath("./" + folderName + "/")
+        file_util.copy_file("./balls/" + i, "./" + folderName + "/" + i)
+    dir_util.remove_tree("./balls/")

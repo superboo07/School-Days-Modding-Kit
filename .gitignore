@@ -1,0 +1,10 @@
+# IDE Stuff
+.vscode/
+.__pycache__/
+**/__pycache__/
+
+# Copywrited stuff I shouldn't include but have here to make my own testing fun for me
+School Days/
+
+# Config File
+config.xml
