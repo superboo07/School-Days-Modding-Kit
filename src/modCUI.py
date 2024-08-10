@@ -4,6 +4,8 @@ import readyGameForModding
 import restoreBackToStock 
 import randomizers.soundEffectRandomizer as soundEffectRandomizer
 import randomizers.movieRandomizer as movieRandomizer
+import randomizers.scriptRandomizer as scriptRandomizer
+import randomizers.eventRandomizer as eventRandomizer
 import time
 import os
 
@@ -88,8 +90,15 @@ def run_option(option):
             restoreBackToStock.restore(args.path)
             time.sleep(2)
         elif option == 2:
-           movieRandomizer.randomizeMovies(args.path) 
+            movieRandomizer.randomizeMovies(args.path)
+            time.sleep(2)
         elif option == 3:
+            scriptRandomizer.randomizeScripts(args.path)
+            time.sleep(2)
+        elif option == 4:
+            eventRandomizer.randomizeEvents(args.path)
+            time.sleep(2)
+        elif option == 5:
             optionThree()
         curses.wrapper(main)
 
@@ -99,7 +108,7 @@ def main(stdscr):
     stdscr.timeout(100) # Set a timeout for getch
 
     # Menu options
-    options = ["Make game moddable!", "Restore Game Back To Stock", "Randomize Movies", "Randomize Sound Effects"]
+    options = ["Make game moddable!", "Restore Game Back To Stock", "Randomize Movies", "Randomize Scripts", "Randomize Pictures", "Randomize Sound Effects"]
     current_option = 0
 
     while True:
