@@ -2,6 +2,7 @@ import os
 import re
 import shutil
 import argparse
+import random
 
 def collectAllFiles(seFolders):
     allFiles = []
@@ -12,7 +13,6 @@ def collectAllFiles(seFolders):
     return allFiles
 
 def shuffleFiles(allFiles):
-    import random
     filePaths = [file[0] for file in allFiles]
     random.shuffle(filePaths)
     return filePaths
@@ -28,7 +28,7 @@ def distributeFiles(allFiles, shuffledFilePaths):
         try:
             shutil.copy(shuffledFilePath, targetFilePath)
         except: 
-            print("blah blah blah")
+            print("Error copying file. It's okay to ignore this!")
         finally:
             print(f"Copied {shuffledFilePath} to {targetFilePath}")
 
