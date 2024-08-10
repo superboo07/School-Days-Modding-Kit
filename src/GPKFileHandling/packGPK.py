@@ -1,3 +1,5 @@
+# Very early and probably never functional
+
 import os
 import struct
 import zlib
