@@ -4,7 +4,7 @@ import GPKFileHandling.unpackGPK as unpackGPK
 import restoreBackToStock
 
 def makeModdable(path):
-    if not os.path.isfile(path + "RouteProcSDHQ.dll"):
+    if not (os.path.isfile(path + "RouteProcSDHQ.dll") | os.path.isfile(path + "RouteProcSD.dll")):
         print("Days game not detected!")
         return False
 

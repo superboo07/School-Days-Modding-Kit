@@ -35,7 +35,7 @@ def distributeFiles(allFiles, shuffledFilePaths):
 def randomizeSoundEffects(basePath, includeSoundEffects, includeVoices):
     regexParts = []
     if includeSoundEffects:
-        regexParts.append(r'^(Se\d{2}|SysSe)')
+        regexParts.append(r'^(Se\d{2}|SysSe|GenSe)')
     if includeVoices:
         regexParts.append(r'(Voice\d{2})$')
     

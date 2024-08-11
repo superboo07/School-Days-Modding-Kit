@@ -44,32 +44,47 @@ def distributeFiles(parentFiles, shuffledParentFiles):
             print(f"Error processing file: {e}")
 
 def randomizeEvents(basePath):
-    regexPattern = r'^Event\d{2}$'
-    eventFolderPattern = re.compile(regexPattern)
+    eventPattern = re.compile(r'^Event\d{2}$')
+    eventZPattern = re.compile(r'^EventZ.*$')
     
-    folders = []
+    eventFolders = []
+    eventZFolders = []
+    
     for entry in os.listdir(basePath):
         folderPath = os.path.join(basePath, entry)
-        if os.path.isdir(folderPath) and eventFolderPattern.match(entry):
-            folders.append(folderPath)
+        if os.path.isdir(folderPath):
+            if eventPattern.match(entry):
+                eventFolders.append(folderPath)
+            elif eventZPattern.match(entry):
+                eventZFolders.append(folderPath)
     
-    if not folders:
-        print(f"No folders matching the pattern found in '{basePath}'.")
+    if not eventFolders and not eventZFolders:
+        print(f"No folders matching the patterns found in '{basePath}'.")
         return
     
-    print(f"Folders found: {folders}")
-    parentFiles = collectParentFiles(folders)
-    if not parentFiles:
-        print("No parent files found in the folders.")
-        return
+    if eventFolders:
+        print(f"Event folders found: {eventFolders}")
+        eventFiles = collectParentFiles(eventFolders)
+        if eventFiles:
+            print(f"Collected event files: {eventFiles}")
+            shuffledEventFiles = shuffleFiles(eventFiles)
+            distributeFiles(eventFiles, shuffledEventFiles)
+        else:
+            print("No parent files found in the Event folders.")
     
-    print(f"Collected parent files: {parentFiles}")
-    shuffledParentFiles = shuffleFiles(parentFiles)
-    distributeFiles(parentFiles, shuffledParentFiles)
+    if eventZFolders:
+        print(f"EventZ folders found: {eventZFolders}")
+        eventZFiles = collectParentFiles(eventZFolders)
+        if eventZFiles:
+            print(f"Collected EventZ files: {eventZFiles}")
+            shuffledEventZFiles = shuffleFiles(eventZFiles)
+            distributeFiles(eventZFiles, shuffledEventZFiles)
+        else:
+            print("No parent files found in the EventZ folders.")
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Randomize event files in EventXX folders.")
-    parser.add_argument("basePath", type=str, help="Base path to search for EventXX folders")
+    parser = argparse.ArgumentParser(description="Randomize event files in EventXX and EventZ* folders.")
+    parser.add_argument("basePath", type=str, help="Base path to search for EventXX and EventZ* folders")
     
     args = parser.parse_args()
     

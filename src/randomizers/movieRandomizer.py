@@ -33,32 +33,47 @@ def distributeFiles(allFiles, shuffledFilePaths):
             print(f"Copied {shuffledFilePath} to {targetFilePath}")
 
 def randomizeMovies(basePath):
-    regexPattern = r'^Movie\d{2}$'
-    movieFolderPattern = re.compile(regexPattern)
+    moviePattern = re.compile(r'^Movie\d{2}$')
+    movieZPattern = re.compile(r'^MovieZ.*$')
     
-    folders = []
+    movieFolders = []
+    movieZFolders = []
+    
     for entry in os.listdir(basePath):
         folderPath = os.path.join(basePath, entry)
-        if os.path.isdir(folderPath) and movieFolderPattern.match(entry):
-            folders.append(folderPath)
+        if os.path.isdir(folderPath):
+            if moviePattern.match(entry):
+                movieFolders.append(folderPath)
+            elif movieZPattern.match(entry):
+                movieZFolders.append(folderPath)
     
-    if not folders:
-        print(f"No folders matching the pattern found in '{basePath}'.")
+    if not movieFolders and not movieZFolders:
+        print(f"No folders matching the patterns found in '{basePath}'.")
         return
     
-    print(f"Folders found: {folders}")
-    allFiles = collectAllFiles(folders)
-    if not allFiles:
-        print("No files found in the folders.")
-        return
+    if movieFolders:
+        print(f"Movie folders found: {movieFolders}")
+        movieFiles = collectAllFiles(movieFolders)
+        if movieFiles:
+            print(f"Collected movie files: {movieFiles}")
+            shuffledMovieFiles = shuffleFiles(movieFiles)
+            distributeFiles(movieFiles, shuffledMovieFiles)
+        else:
+            print("No files found in the Movie folders.")
     
-    print(f"Collected files: {allFiles}")
-    shuffledFilePaths = shuffleFiles(allFiles)
-    distributeFiles(allFiles, shuffledFilePaths)
+    if movieZFolders:
+        print(f"MovieZ folders found: {movieZFolders}")
+        movieZFiles = collectAllFiles(movieZFolders)
+        if movieZFiles:
+            print(f"Collected MovieZ files: {movieZFiles}")
+            shuffledMovieZFiles = shuffleFiles(movieZFiles)
+            distributeFiles(movieZFiles, shuffledMovieZFiles)
+        else:
+            print("No files found in the MovieZ folders.")
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Randomize movie files in MovieXX folders.")
-    parser.add_argument("basePath", type=str, help="Base path to search for MovieXX folders")
+    parser = argparse.ArgumentParser(description="Randomize movie files in MovieXX and MovieZ* folders.")
+    parser.add_argument("basePath", type=str, help="Base path to search for MovieXX and MovieZ* folders")
     
     args = parser.parse_args()
     

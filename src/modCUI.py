@@ -139,7 +139,7 @@ if __name__ == "__main__":
     parser.add_argument("path", help="Path to game files")
     args = parser.parse_args()
 
-    if not os.path.isfile(args.path + "RouteProcSDHQ.dll"):
+    if not (os.path.isfile(args.path + "RouteProcSDHQ.dll") | os.path.isfile(args.path + "RouteProcSD.dll")):
         print("Days game not detected!")
         exit(1)
 
